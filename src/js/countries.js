@@ -19,17 +19,26 @@ function fetchCountry(countries) {
 refs.input.addEventListener('input', debounce(onSearchCountry, 500));
 
 function onSearchCountry(e) {
+  if (!e.target.value) {
+    refs.listCountrys.innerHTML = '';
+    return;
+  }
   fetchCountry(e.target.value)
     .then(res => renderCountry(res))
     .catch(error => console.log(error));
 }
 
 function renderCountry(countries) {
-  if (countries.length > 1) {
-    // refs.countryBox.innerHTML = '';
-    const markupCountries = countriesTpl(countries);
-    refs.countryBox.innerHTML = markupCountries;
+  refs.countryBox.innerHTML = '';
+  if (countries.length === 1) {
+    const markup = countryTpl(countries);
+    refs.countryBox.insertAdjacentHTML('beforeend', markup);
   }
-  const markup = countryTpl(countries);
-  refs.countryBox.innerHTML = markup;
+  if (countries.length >= 2 && countries.length <= 10) {
+    const markup = countriesTpl(countries);
+    refs.countryBox.insertAdjacentHTML('beforeend', markup);
+  }
+  if (countries.length > 10) {
+    console.log('error');
+  }
 }

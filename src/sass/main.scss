@@ -11,22 +11,36 @@ img {
 body {
   font-family: sans-serif;
 }
+
 .container-country {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.input-countries {
+  width: 300px;
+  height: 20px;
 }
 
 .description-country {
   display: flex;
   justify-content: space-between;
+  margin: auto;
+  width: 800px;
 }
 
-.capital-country {
-  font-weight: bold;
-  margin-right: 5px;
+.title-country {
+  font-size: 40px;
 }
 
 .capital-description {
   display: flex;
   align-items: baseline;
+}
+.capital-country {
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 .population-description {
@@ -38,11 +52,13 @@ body {
   margin-right: 5px;
 }
 
+.languages-description {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
 .capital-languages {
   font-weight: bold;
   margin-right: 5px;
+  margin-bottom: 0;
 }
-
-// display: flex;
-// flex-direction: column;
-// align-items: start;

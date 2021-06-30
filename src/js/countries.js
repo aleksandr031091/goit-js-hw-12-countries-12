@@ -1,44 +1,40 @@
-import debounce from 'lodash.debounce';
+import API from './fetch-api';
+import refs from './refs';
 
 import countryTpl from '../templates/country.hbs';
 import countriesTpl from '../templates/countries.hbs';
 
-const refs = {
-  input: document.querySelector('#input-countries-js'),
-  countryBox: document.querySelector('#countries-box'),
-};
-
-function fetchCountry(countries) {
-  const url = `https://restcountries.eu/rest/v2/name/${countries}`;
-
-  return fetch(url).then(res => {
-    return res.json();
-  });
-}
+import debounce from 'lodash.debounce';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+import { error } from '@pnotify/core/dist/PNotify.js';
 
 refs.input.addEventListener('input', debounce(onSearchCountry, 500));
 
 function onSearchCountry(e) {
-  if (!e.target.value) {
-    refs.listCountrys.innerHTML = '';
+  if (e.target.value === '') {
     return;
   }
-  fetchCountry(e.target.value)
+
+  API.fetchCountry(e.target.value)
     .then(res => renderCountry(res))
-    .catch(error => console.log(error));
+    .catch(err => error({ text: err.message }));
 }
 
 function renderCountry(countries) {
   refs.countryBox.innerHTML = '';
+
   if (countries.length === 1) {
     const markup = countryTpl(countries);
     refs.countryBox.insertAdjacentHTML('beforeend', markup);
   }
+
   if (countries.length >= 2 && countries.length <= 10) {
     const markup = countriesTpl(countries);
     refs.countryBox.insertAdjacentHTML('beforeend', markup);
   }
+
   if (countries.length > 10) {
-    console.log('error');
+    error({ text: 'Too many matches found. Please enter a more specific query!' });
   }
 }

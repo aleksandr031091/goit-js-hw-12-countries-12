@@ -1,0 +1,48 @@
+html {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: sans-serif;
+}
+.container-country {
+}
+
+.description-country {
+  display: flex;
+  justify-content: space-between;
+}
+
+.capital-country {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.capital-description {
+  display: flex;
+  align-items: baseline;
+}
+
+.population-description {
+  display: flex;
+  align-items: baseline;
+}
+.capital-population {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.capital-languages {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+// display: flex;
+// flex-direction: column;
+// align-items: start;
